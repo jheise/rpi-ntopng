@@ -11,8 +11,9 @@ RUN apt-get install ntopng
 
 # setup env variables
 ENV NPROBE_PORT 5556
+ENV LOCAL_NET 10.0.0.0/24
 
 # expose ports
 EXPOSE 3000
 
-CMD ntopng -i tcp://nprobe:${NPROBE_PORT} -r redis
+CMD ntopng -i tcp://nprobe:${NPROBE_PORT} -r redis --local-networks ${LOCAL_NET}
